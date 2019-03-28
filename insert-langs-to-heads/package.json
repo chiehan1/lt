@@ -1,0 +1,19 @@
+{
+  "name": "insert-langs-to-heads",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csvjson": "5.1.0",
+    "glob": "7.1.3",
+    "html-parse-stringify2": "2.0.1",
+    "javascript-natural-sort": "0.7.1",
+    "wylie": "1.0.2"
+  }
+}
