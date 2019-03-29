@@ -16,7 +16,7 @@ const xmlPaths = glob.sync(globPath)
 const sutraHeadRegex = new RegExp('<(sutra|head) [^>]+?>', 'g');
 const isSutra = tag => new RegExp('sutra').exec(tag);
 const sutraRegex = new RegExp('<sutra id="([^"]+?)"');
-const isInHeadRange = tag => new RegExp(`n="${headRange}"`).exec(tag);
+const isInHeadRange = tag => new RegExp(`n="[${headRange}]"`).exec(tag);
 
 const headsInSutras = {};
 let sutraId = '';
@@ -32,7 +32,7 @@ xmlPaths.forEach(xmlPath => {
       return;
     }
 
-    if (isInHeadRange) {
+    if (isInHeadRange(tag)) {
       const headAttrs = htmlParse(tag)[0].attrs;
       headsInSutras[sutraId].push(headAttrs);
     }
