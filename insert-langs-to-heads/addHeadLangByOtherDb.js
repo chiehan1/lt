@@ -3,7 +3,8 @@ const otherDbSutraHeadPath = process.argv[3];
 const sutraIdMapPath = process.argv[4];
 const targetSutraKey = 'degeId';
 const otherSutraKey = 'jiangId';
-const headRange = [2];
+const headRange = [4];
+const volRange = [1, 102];
 
 const fs = require('fs');
 const glob = require('glob');
@@ -18,6 +19,10 @@ const targetDbName = Path.basename(targetDbPath);
 const globPath = `${targetDbPath}/${targetDbName}*/${targetDbName}*.xml`;
 
 const xmlPaths = glob.sync(globPath)
+  .filter(path => {
+    const volN = new RegExp(`${targetDbName}(\\d+)`).exec(path)[1];
+    return volN >= volRange[0] && volN <= volRange[1];
+  })
   .sort(naturalSort);
 
 const sutraHeadRegex = new RegExp('<(sutra|head) [^>]+?>', 'g');
@@ -83,7 +88,7 @@ xmlPaths.forEach(xmlPath => {
       logMessage(`there is no bo in ${otherSutraKey}: ${otherSutraId}\n`)
     }
 
-    headAttrs.bo = bo || targetT;
+    headAttrs.bo = targetT;
     headAttrs.en = en || toWylie(headAttrs.bo);
     headAttrs.tw = tw || headAttrs.bo;
     headAttrs.cn = cn || headAttrs.bo;

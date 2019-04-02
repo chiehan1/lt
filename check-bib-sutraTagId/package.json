@@ -1,0 +1,15 @@
+{
+  "name": "check-bib-sutratagid",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "glob": "7.1.2",
+    "javascript-natural-sort": "0.7.1"
+  }
+}
