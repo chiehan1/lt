@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "7.4.3",
     "@babel/polyfill": "7.4.3",
     "@babel/preset-env": "7.4.3",
     "@babel/register": "7.4.0",
