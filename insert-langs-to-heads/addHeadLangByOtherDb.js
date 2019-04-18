@@ -3,7 +3,7 @@ const otherDbSutraHeadPath = process.argv[3];
 const sutraIdMapPath = process.argv[4];
 const targetSutraKey = 'degeId';
 const otherSutraKey = 'jiangId';
-const headRange = [4];
+const headRange = [2];
 const volRange = [1, 102];
 
 const fs = require('fs');
@@ -13,6 +13,7 @@ const toWylie = require('wylie').toWylie;
 const htmlParse = require('html-parse-stringify2').parse;
 const naturalSort = require('javascript-natural-sort');
 const otherDbSutraHead = require(otherDbSutraHeadPath);
+poolJiangHwaYenHeadTogether(otherDbSutraHead);
 const sutraIdMap = makeSutraIdMap(require(sutraIdMapPath), targetSutraKey, otherSutraKey);
 
 const targetDbName = Path.basename(targetDbPath);
@@ -44,7 +45,17 @@ xmlPaths.forEach(xmlPath => {
 
     if (isSutra(tag)) {
       targetHeadShouldChange = false;
-      const targetSutraId = sutraRegex.exec(tag)[1];
+      let targetSutraId = sutraRegex.exec(tag)[1];
+
+      if (isDegeHwaYen1stSutraTag(targetSutraId)) {
+        targetSutraId = 'd44';
+      }
+
+      if (shouldPassDegeHwaYenSubSutraId(targetSutraId)) {
+        targetHeadShouldChange = true;
+        return tag;
+      }
+
       const hasMatchedSutra = sutraIdMap[targetSutraId];
 
       if (hasMatchedSutra) {
@@ -134,9 +145,30 @@ function makeSutraIdMap(sutraMap, targetSutraKey, otherSutraKey) {
   sutraMap.forEach(row => {
     const targetSutraId = row[targetSutraKey];
     const otherSutraId = row[otherSutraKey];
+
     if (targetSutraId && otherSutraId) {
       newMap[targetSutraId] = otherSutraId;
     }
   });
   return newMap;
+}
+
+function poolJiangHwaYenHeadTogether(otherDbSutraHead) {
+  const J299aHeads = otherDbSutraHead['J299a'];
+  const J299bHeads = otherDbSutraHead['J299b'];
+  const J299cHeads = otherDbSutraHead['J299c'];
+  const J299dHeads = otherDbSutraHead['J299d'];
+  const J299eHeads = otherDbSutraHead['J299e'];
+  const J299fHeads = otherDbSutraHead['J299f'];
+  const J299gHeads = otherDbSutraHead['J299g'];
+
+  otherDbSutraHead['J299'].push(...J299aHeads, ...J299bHeads, ...J299cHeads, ...J299dHeads, ...J299eHeads, ...J299fHeads, ...J299gHeads);
+}
+
+function shouldPassDegeHwaYenSubSutraId(sutraId) {
+  return /^d44[bcd]$/.test(sutraId);
+}
+
+function isDegeHwaYen1stSutraTag(sutraId) {
+  return 'd44a' === sutraId;
 }
