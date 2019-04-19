@@ -12,13 +12,14 @@ let getTibEntry = tibEntryColumn => entryObj => {
     .replace(/^[་།༏ ༽\u0f0c྄ོུྐྔྕེྨིྱླ]*(.*?)[་།༏ \u0f0c]*$/, '$1') // ྄ \u0f84
     .replace(/^\((.+?)\)$/, '$1')
     .replace(/^༼(.+?)༽$/, '$1')
-    .replace(/ +/, ' ');
+    .replace(/^[་།༏ ༽\u0f0c྄ོུྐྔྕེྨིྱླ]*(.*?)[་།༏ \u0f0c]*$/, '$1');
 
     return tibEntry;
 };
 
 const checkTibEntry = entry => {
-  return /^[\u0f00-\u0fff ()]+$/.test(entry);
+  // \u0f3c\u0f3d ༼  ༽
+  return /^[\u0f00-\u0f3b\u0f3e-\u0fff]+$/.test(entry);
 };
 
 const integrateGarchenCsv = async () => {
