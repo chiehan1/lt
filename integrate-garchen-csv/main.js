@@ -14,7 +14,10 @@ let getTibEntry = tibEntryColumn => entryObj => {
     .replace(/^༼(.+?)༽$/, '$1')
     .replace(/^[་།༏ ༽\u0f0c྄ོུྐྔྕེྨིྱླ]*(.*?)[་།༏ \u0f0c]*$/, '$1');
 
-    return tibEntry;
+  if (tibEntry && !/\u0f7f$/.test(tibEntry)) {
+    return `${tibEntry}་`;
+  }
+  return tibEntry;
 };
 
 const checkTibEntry = entry => {
@@ -39,7 +42,7 @@ const integrateGarchenCsv = async () => {
   }));
 
   const boEntries = union(...boEntryArrs).sort(tibetanSort)
-    .map(entry => ({ bo: `${entry}་` }));
+    .map(entry => ({ bo: entry }));
 
   const jsonString = JSON.stringify(boEntries, null, '  ');
   const resultString = `export default = ${jsonString};\n`;
