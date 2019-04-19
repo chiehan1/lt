@@ -8,7 +8,13 @@ import { fnTibColMap, tibCnDictionaryName } from './tibColName';
 
 let getTibEntry = tibEntryColumn => entryObj => {
   let tibEntry = entryObj[tibEntryColumn];
-  return tibEntry.replace(/^[་། ]*(.+?)[་། ]*$/, '$1') + '་';
+  tibEntry = tibEntry
+    .replace(/^[་།༏ ༽\u0f0c྄ོུྐྔྕེྨིྱླ]*(.*?)[་།༏ \u0f0c]*$/, '$1') // ྄ \u0f84
+    .replace(/^\((.+?)\)$/, '$1')
+    .replace(/^༼(.+?)༽$/, '$1')
+    .replace(/ +/, ' ');
+
+    return tibEntry;
 };
 
 const checkTibEntry = entry => {
@@ -27,15 +33,15 @@ const integrateGarchenCsv = async () => {
     const dictionaryName =  isTibCnDictionary ? tibCnDictionaryName : Path.basename(route, '.csv');
     const tibEntryColumn = fnTibColMap[dictionaryName];
 
-    const getTibEntryByColName = getTibEnty(tibEntryColumn);
+    const getTibEntryByColName = getTibEntry(tibEntryColumn);
     return entryObjs.map(getTibEntryByColName).filter(checkTibEntry);
   }));
 
   const boEntries = union(...boEntryArrs).sort(tibetanSort)
-    .map(entry => { bo: entry });
+    .map(entry => ({ bo: `${entry}་` }));
 
   const jsonString = JSON.stringify(boEntries, null, '  ');
-  const resultString = `export default = ${jsonString};`;
+  const resultString = `export default = ${jsonString};\n`;
   writeFileSync('./result.js', resultString, 'utf8');
 };
 
