@@ -45,7 +45,7 @@ const integrateGarchenCsv = async () => {
     .map(entry => ({ bo: entry }));
 
   const jsonString = JSON.stringify(boEntries, null, '  ');
-  const resultString = `export default = ${jsonString};\n`;
+  const resultString = `export default ${jsonString};\n`;
   writeFileSync('./result.js', resultString, 'utf8');
 };
 
