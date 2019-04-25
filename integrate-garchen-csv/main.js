@@ -3,7 +3,7 @@ import Path from 'path';
 import glob from 'glob';
 import { toObject as csv2json } from 'csvjson';
 import { compare as tibetanSort } from 'tibetan-sort-js';
-import { union, asyncWrap } from './helpers';
+import { union, asyncWrap, flatten } from './helpers';
 import { fnTibColMap, tibCnDictionaryName } from './tibColName';
 
 let getTibEntry = tibEntryColumn => entryObj => {
@@ -22,6 +22,10 @@ let getTibEntry = tibEntryColumn => entryObj => {
 
 const checkTibEntry = entry => {
   // \u0f3c\u0f3d ༼  ༽
+  if (/^[^"]+?།[^"]+?$/.test(entry)) {
+    return false;
+  }
+
   return /^[\u0f00-\u0f3b\u0f3e-\u0fff]+$/.test(entry);
 };
 
@@ -35,10 +39,14 @@ const integrateGarchenCsv = async () => {
 
     const isTibCnDictionary = (new RegExp(tibCnDictionaryName)).test(route);
     const dictionaryName =  isTibCnDictionary ? tibCnDictionaryName : Path.basename(route, '.csv');
-    const tibEntryColumn = fnTibColMap[dictionaryName];
+    const tibEntryColumns = fnTibColMap[dictionaryName];
 
-    const getTibEntryByColName = getTibEntry(tibEntryColumn);
-    return entryObjs.map(getTibEntryByColName).filter(checkTibEntry);
+    const results = tibEntryColumns.map(tibEntryColumn => {
+      const getTibEntryByColName = getTibEntry(tibEntryColumn);
+      return entryObjs.map(getTibEntryByColName).filter(checkTibEntry);
+    });
+
+    return flatten(results);
   }));
 
   const boEntries = union(...boEntryArrs).sort(tibetanSort)

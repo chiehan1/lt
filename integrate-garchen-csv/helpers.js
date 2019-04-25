@@ -1,4 +1,4 @@
-const flatten = (arrs) => arrs.reduce((a, b) => a.concat(b));
+export const flatten = (arrs) => arrs.reduce((a, b) => a.concat(b));
 
 const uniq = arr => [...new Set(arr)];
 
