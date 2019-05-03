@@ -67,7 +67,7 @@ const getStacks = () => {
                 const resultIndex = sylMap[syl];
 
                 if (resultIndex) {
-                  const position = `${pbId} line${lineN}`;
+                  const position = `${pbId} ln${++lineN}`;
                   const existedDbField = result[resultIndex][dbName];
 
                   if (! existedDbField) {
@@ -84,7 +84,7 @@ const getStacks = () => {
 
                 result.push({
                   syl,
-                  [dbName]: `${pbId} line${lineN}`
+                  [dbName]: `${pbId} ln${++lineN}`
                 });
                 sylMap[syl] = result.length - 1;  
               });
