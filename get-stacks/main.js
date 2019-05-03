@@ -1,5 +1,6 @@
 import fs from 'fs';
 import glob from 'glob';
+import { toCSV as json2csv } from 'csvjson';
 import naturalSort from 'javascript-natural-sort';
 
 const dbNames = ['jiangkangyur', 'degekangyur', 'degetengyur', 'gampopa', '8thkarmapa', 'mipam', 'tsongkhapa', 'gorampa', 'taranatha', 'bonpokangyur'];
@@ -9,7 +10,8 @@ const hasStack = (str) => {
 };
 
 const getStacks = () => {
-  const result = {};
+  let sylMap = {};
+  let result = [''];
 
   dbNames.forEach(dbName => {
     const fileRoutes = glob.sync(`../../${dbName}/${dbName}*/${dbName}*.xml`)
@@ -21,17 +23,41 @@ const getStacks = () => {
       if (hasStack(xml)) {
         xml.replace(/<pb/g, '!@#$%<pb').split('!@#$%')
           .filter(pb => hasStack(pb))
-          .map(pb => {
+          .forEach(pb => {
             const pbId = /<pb id="(.+?)"/.exec(pb)[1];
             const pbText = pb.replace(/<[^>]*?>/g, '').trim();
-            const lines = pbText.split(/[\r\n]+?/)
-              .map(line, i => {
-                const stacks = ;
+
+            pbText.split(/[\r\n]+?/)
+              .foreach(line, lineN => {
+                const lines = line.split(/[\u0f00\u0f15-\u0f39\u0f3e-\u0fd2\u0fd5-\u0fd8]+/g);
+
+                lines.filter(line => hasStack(line))
+                  .forEach(syl => {
+                    if (hasStack(syl)) {
+                      const resultIndex = sylMap[syl];
+
+                      if (resultIndex) {
+                        result[resultIndex].positions += `\n${kdbName} ${pbId} line${lineN}`);
+                        return;
+                      }
+
+                      const newResultIndex = result.length;
+                      result[newResultIndex].push({
+                        syl
+                        positions: `${kdbName} ${pbId} line${lineN}`
+                      });
+                      sylMap[syl] = newResultIndex;
+                    }
+                  });
               });
           });
       }
     });
   });
+
+  const resultCsv = json2csv(result);
+
+  fs.writeFileSync('./result.csv', resultCsv, 'utf8');
 };
 
-//getStacks();
+getStacks();
