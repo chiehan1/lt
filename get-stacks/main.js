@@ -76,7 +76,7 @@ const getStacks = () => {
                   }
 
                   if (! existedDbField.includes(position)) {
-                    result[resultIndex][dbName] += `,\n${position}`;
+                    result[resultIndex][dbName] += `, ${position}`;
                   }
 
                   return;
