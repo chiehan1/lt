@@ -2,3 +2,5 @@ node_modules
 .DS_Store
 test.js
 result*.csv
+*suspected*.txt
+*suspected*.xml

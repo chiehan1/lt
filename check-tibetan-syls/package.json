@@ -1,0 +1,16 @@
+{
+  "name": "check-tibetan-syls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "check-tibetan": "git+https://github.com/karmapa/checkTibetan_for_ketaka.git#new-correct-syllables",
+    "glob": "7.1.2",
+    "javascript-natural-sort": "0.7.1"
+  }
+}
