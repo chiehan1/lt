@@ -1,0 +1,16 @@
+{
+  "name": "add-pb-tag",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "7.1.4",
+    "javascript-natural-sort": "0.7.1"
+  }
+}
