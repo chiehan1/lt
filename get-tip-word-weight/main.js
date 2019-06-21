@@ -1,76 +1,60 @@
-import { readJson, readFile, writeFile} from 'fs-extra';
-import globby from 'globby';
-import naturalSort from 'javascript-natural-sort';
+import { get as httpGet } from 'http';
+import { get as httpsGet } from 'https';
+import { readJson, writeFile } from 'fs-extra';
+import {  } from 'async';
 
-const dbNames = ['gampopa'];
-//const dbNames = ['jiangkangyur', 'degekangyur', 'degetengyur', 'gampopa', '8thkarmapa', 'mipam', 'tsongkhapa', 'gorampa', 'taranatha', 'bonpokangyur'];
+const dbNames = ['jiangkangyur', 'degekangyur', 'degetengyur', 'gampopa', '8thkarmapa', 'mipam', 'tsongkhapa', 'gorampa', 'taranatha', 'bonpokangyur'];
 
 const getTipWordWeight = async (dbNames) => {
-  let tipWords = await readJson('./../../tip-word/tipWords.json');
-  const tipWordsRegexs = tipWords.map(tipWord => new RegExp(`[\s་།]${tipWord.bo.substring(0, bo.length - 1)}[\s་།]`, 'g'));
 
-  for (const dbName of dbNames) {
-    const globPath = `./../../${dbName}/${dbName}*/${dbName}*.xml`;
+  let tipWords = (await readJson('./../../tip-word/tipWords.json'))
+    .map(tipWord => {
+      tipWord.weights = {
+        'jiangkangyur': 100,
+        'degekangyur': 100,
+        'degetengyur': 100,
+        'mipam': 100,
+        'gampopa': 100,
+        '8thkarmapa': 100,
+        'gorampa': 100,
+        'tsongkhapa': 100,
+        'taranatha': 100,
+        'bonpokangyur': 100
+      };
+      return tipWord;
+    });
 
-    const folderMap = {};
-    const pathsByFolders = [];
+  for (const [index, tipWord] of tipWords.entries()) {
 
-    (await globby(globPath)).sort(naturalSort)
-      .forEach(xmlPath => {
-        const folderRegex = new RegExp(`${dbName}\\d+(-\\d+)?`);
+    const { bo } = tipWord;
 
-        const folder = folderRegex.exec(xmlPath)[0];
+    for (const dbName of dbNames) {
 
-        let folderIndex = folderMap[folder];
+      const count = await new Promise((resolve, reject) => {
 
-        if (folderIndex) {
-          pathsByFolders[folderIndex].push(xmlPath);
-          return;
-        }
+        const uri = `http://localhost:3010/pbs/_search?size=10&kdbName=${dbName}&keyword=${bo}&minScore=1e-7&searchRange=current-kdb`;
 
-        folderIndex = pathsByFolders.length;
-        folderMap[folder] = folderIndex;
-        pathsByFolders[folderIndex] = [xmlPath];
+        httpGet(encodeURI(uri), res => {
+          let result = '';
+
+          res.setEncoding('utf8');
+          res.on('data', data => {
+            result += data;
+          });
+
+          res.on('end', () => {
+            resolve(JSON.parse(result).total);
+          });
+        }).on('error', e => {
+          reject(e);
+        });
+
       });
 
-    for (const pathsByFolder of pathsByFolders) {
-      const folderText = '';
-
-      for (const xmlPath of pathsByFolder) {
-        let xmlText = await readFile(xmlPath, 'utf8');
-        xmlText = xmlText.replace(/<(?!pb)[^>]+?>/g, '');
-
-        folderText += xmlText;
-      }
-
-      for (const regex of tipWordsRegexs) {
-        const { bo } = tipWord;
-        const tipWordRegex = new RegExp(`[\s་།]${bo.substring(0, bo.length - 1)}[\s་།]`, 'g');
-
-        const occrs = (folderText.match(tipWordRegex) || []).length;
-
-        if (! tipWord.weights) {
-          tipWord.weights = {
-            'jiangkangyur': 100,
-            'degekangyur': 100,
-            'degetengyur': 100,
-            'mipam': 100,
-            'gampopa': 100,
-            '8thkarmapa': 100,
-            'gorampa': 100,
-            'tsongkhapa': 100,
-            'taranatha': 100,
-            'bonpokangyur': 100
-          };
-        }
-
-        tipWord.weights[dbName] += occrs;
-
-        if (occrs) {
-          console.log(dbName, bo, tipWord.weights[dbName]);
-        }
-      }
+      tipWord.weights[dbName] += count;
     }
+
+    console.log('tipWord', index, 'done');
   }
 
   tipWords = tipWords.filter(tipWord => {
@@ -78,22 +62,7 @@ const getTipWordWeight = async (dbNames) => {
       .some(e => !!(e - 100));
   });
 
-  await writeFile('./newTipWord', JSON.stringify(tipWords, null, ' '), 'utf8');
+  await writeFile('./newTipWord.json', JSON.stringify(tipWords, null, ' '), 'utf8');
 };
 
 getTipWordWeight(dbNames);
-
-/*
-const dbIdMap = {
-  'jiangkangyur': 0,
-  'degekangyur': 1,
-  'degetengyur': 1000,
-  'mipam': 10000,
-  'gampopa': 20000,
-  '8thkarmapa': 20001,
-  'gorampa': 30000,
-  'taranatha': 40000,
-  'tsongkhapa': 50000,
-  'bonpokangyur': 100000
-};
-*/

@@ -1,0 +1,20 @@
+{
+  "name": "filter-tipword",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "7.4.5",
+    "@babel/polyfill": "7.4.4",
+    "@babel/preset-env": "7.4.5",
+    "@babel/register": "7.4.4",
+    "fs-extra": "8.0.1"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,140 @@
+jiangkangyur
+fonFoNumber 2166.8 foNumber 8787.6
+291 [ { bo: 'དབང་གི་སྦྱིན་སྲེག་',
+    jiangkangyurWeightInText: 101,
+    degekangyurWeightInText: 102,
+    degetengyurWeightInText: 127,
+    mipamWeightInText: 103,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 100,
+    gorampaWeightInText: 101,
+    tsongkhapaWeightInText: 105,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 100 },
+  32534 ]
+degekangyur
+fonFoNumber 2141.9 foNumber 8748
+299 [ { bo: 'སྟོབས་མཆོག་གི་སྟོབས་',
+    jiangkangyurWeightInText: 291,
+    degekangyurWeightInText: 101,
+    degetengyurWeightInText: 100,
+    mipamWeightInText: 101,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 100,
+    gorampaWeightInText: 100,
+    tsongkhapaWeightInText: 100,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 100 },
+  18111 ]
+degetengyur
+fonFoNumber 2527.5 foNumber 9946.8
+368 [ { bo: 'ཛྙཱ་ན་སུ་ཏྲ་',
+    jiangkangyurWeightInText: 100,
+    degekangyurWeightInText: 100,
+    degetengyurWeightInText: 101,
+    mipamWeightInText: 100,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 100,
+    gorampaWeightInText: 100,
+    tsongkhapaWeightInText: 100,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 100 },
+  38916 ]
+gampopa
+fonFoNumber 727.5 foNumber 3096.9
+127 [ { bo: 'ལེགས་པར་བྱང་བ་',
+    jiangkangyurWeightInText: 291,
+    degekangyurWeightInText: 301,
+    degetengyurWeightInText: 392,
+    mipamWeightInText: 103,
+    gampopaWeightInText: 101,
+    '8thkarmapaWeightInText': 100,
+    gorampaWeightInText: 100,
+    tsongkhapaWeightInText: 103,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 100 },
+  46567 ]
+8thkarmapa
+fonFoNumber 1143.5 foNumber 5636.7
+147 [ { bo: 'བདུད་འདུལ་',
+    jiangkangyurWeightInText: 397,
+    degekangyurWeightInText: 412,
+    degetengyurWeightInText: 468,
+    mipamWeightInText: 178,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 101,
+    gorampaWeightInText: 104,
+    tsongkhapaWeightInText: 110,
+    taranathaWeightInText: 104,
+    bonpokangyurWeightInText: 106 },
+  22414 ]
+mipam
+fonFoNumber 2562.6 foNumber 10881.9
+162 [ { bo: 'དགེ་ལུགས་པ་',
+    jiangkangyurWeightInText: 100,
+    degekangyurWeightInText: 100,
+    degetengyurWeightInText: 100,
+    mipamWeightInText: 101,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 100,
+    gorampaWeightInText: 100,
+    tsongkhapaWeightInText: 100,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 100 },
+  7495 ]
+gorampa
+fonFoNumber 1186.8 foNumber 6024.6
+160 [ { bo: 'ཚེ་ལྷ་མ་',
+    jiangkangyurWeightInText: 322,
+    degekangyurWeightInText: 332,
+    degetengyurWeightInText: 378,
+    mipamWeightInText: 100,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 100,
+    gorampaWeightInText: 101,
+    tsongkhapaWeightInText: 100,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 100 },
+  38174 ]
+tsongkhapa
+fonFoNumber 1543.6 foNumber 6909.3
+179 [ { bo: 'བདག་མ་མཆིས་པ་',
+    jiangkangyurWeightInText: 323,
+    degekangyurWeightInText: 329,
+    degetengyurWeightInText: 375,
+    mipamWeightInText: 162,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 100,
+    gorampaWeightInText: 160,
+    tsongkhapaWeightInText: 101,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 100 },
+  22335 ]
+taranatha
+fonFoNumber 978.1 foNumber 3460.5
+126 [ { bo: 'རྒྱུད་སྡེ་འོག་མ་',
+    jiangkangyurWeightInText: 100,
+    degekangyurWeightInText: 100,
+    degetengyurWeightInText: 100,
+    mipamWeightInText: 167,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 147,
+    gorampaWeightInText: 198,
+    tsongkhapaWeightInText: 294,
+    taranathaWeightInText: 101,
+    bonpokangyurWeightInText: 100 },
+  9241 ]
+bonpokangyur
+fonFoNumber 500.4 foNumber 1623.6
+124 [ { bo: 'གཟར་བུ་',
+    jiangkangyurWeightInText: 312,
+    degekangyurWeightInText: 322,
+    degetengyurWeightInText: 439,
+    mipamWeightInText: 168,
+    gampopaWeightInText: 100,
+    '8thkarmapaWeightInText': 148,
+    gorampaWeightInText: 162,
+    tsongkhapaWeightInText: 181,
+    taranathaWeightInText: 100,
+    bonpokangyurWeightInText: 101 },
+  41270 ]
