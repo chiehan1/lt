@@ -1,0 +1,27 @@
+{
+  "name": "tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "exceljs": "1.13.0",
+    "fs-extra": "8.1.0",
+    "glob": "7.1.4",
+    "tibetdoc-parser": "git+https://github.com/karmapa/tibetdoc-parser.git#24eef96"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiehan1/lt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chiehan1/lt/issues"
+  },
+  "homepage": "https://github.com/chiehan1/lt#readme"
+}

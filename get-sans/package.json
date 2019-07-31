@@ -1,0 +1,23 @@
+{
+  "name": "get-sans",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "7.5.0",
+    "@babel/plugin-proposal-export-default-from": "7.5.2",
+    "@babel/polyfill": "7.4.4",
+    "@babel/preset-env": "7.5.2",
+    "@babel/register": "7.4.4",
+    "exceljs": "1.13.0",
+    "fs-extra": "8.1.0",
+    "glob": "7.1.4",
+    "javascript-natural-sort": "0.7.1"
+  }
+}
