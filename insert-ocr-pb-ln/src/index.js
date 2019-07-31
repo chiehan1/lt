@@ -1,0 +1,2 @@
+export getTexts from './getTexts';
+
